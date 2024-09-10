@@ -1,0 +1,20 @@
+# Bật chế độ rewrite
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Đặt RewriteBase nếu ứng dụng của bạn nằm trong thư mục con
+    # Nếu ứng dụng nằm ở thư mục gốc, bạn có thể bỏ qua dòng này
+    # Ví dụ: nếu ứng dụng nằm trong thư mục 'myapp', hãy sử dụng RewriteBase /myapp/
+    # RewriteBase /
+
+    # Nếu là file hoặc thư mục vật lý thì không chuyển tiếp
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Chuyển tất cả các yêu cầu không phải là file hoặc thư mục đến index.php
+    RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+</IfModule>
+
+# Các cấu hình khác (nếu cần)
+# Ví dụ: đặt mã hóa ký tự mặc định
+# AddDefaultCharset UTF-8
